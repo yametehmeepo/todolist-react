@@ -130,13 +130,26 @@ class ListPanel extends Component {
   }
 }
 
-/*class Statistics extends Component {
+class Statistics extends Component {
   render(){
+    var ListDataArr = this.props.ListDataArr,
+        total = ListDataArr.length,
+        finished = 0,
+        nofinished = 0;
+        ListDataArr.forEach(function(item,index){
+          if(item.ischecked){
+            finished++;
+          }else{
+            nofinished++;
+          }
+        })
     return (
-
+      <div className="statisticsPanel">
+        共: <span className="color01">{total}</span> 个事项, 其中 完成事项: <span className="color02">{finished}</span> 个, 代办事项: <span className="color03">{nofinished}</span> 个.
+      </div>
     );
   }
-}*/
+}
 
 class App extends Component {
   constructor(props){
@@ -161,7 +174,7 @@ class App extends Component {
       <div id="app">
         <AddPanel ListDataArr={this.state.ListDataArr} SetInputToListData={this.SetInputToListData}></AddPanel>
         <ListPanel ListDataArr={this.state.ListDataArr} checkhandler={this.SetInputToListData}></ListPanel>
-        {/*<Statistics></Statistics>*/}
+        <Statistics ListDataArr={this.state.ListDataArr}></Statistics>
       </div>
     );
   }
